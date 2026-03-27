@@ -36,8 +36,20 @@ const getAllEvents = async queryData => {
       $lte: queryData.maxPrice || Infinity // if no max, default to infinity
     }
 
+    // sorting with mongodb
+    // { propertyToSortBy: sortOrder }
+    const sortObject = {}
+    // should look something like this: { title: "desc"}
+    // what do i need to set sortObject equal to in order to make ?sortBy=PROPERTY&sortOrder=ORDER 
+
+    // sortObject[queryData.sortBy]
+    // first, evaluate queryData.sortBy
+    // sortObject["title"] - same as sortObject.title
+    sortObject[queryData.sortBy || "_id"] = queryData.sortOrder || "asc"
+    
     // example: ?date=07-10-26&category=conference - only conferences on July 10, 2026
-    const events = await Event.find(filterObject)
+
+    const events = await Event.find(filterObject).sort(sortObject)
 
     return events
   } catch (error) {
