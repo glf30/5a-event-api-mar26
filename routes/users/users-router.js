@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
   } catch (error) {
     res.status(404).json({
       message: 'failure',
-      payload: error.message
+      payload: "Cannot get user by ID"
     })
   }
 })
