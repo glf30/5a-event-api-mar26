@@ -7,6 +7,7 @@ const app = express();
 
 const PORT = 3000;
 
+// Middleware
 app.use(logger("dev"))
 app.use(express.json())
 
